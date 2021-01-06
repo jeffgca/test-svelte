@@ -1,2 +1,0 @@
-# test-svelte
-Begin app
