@@ -1,19 +1,28 @@
+<svelte:head>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jzz" on:load={jzzLoaded}></script>
+  <script src="https://cdn.jsdelivr.net/npm/jzz-midi-gear" on:load={jzzGearLoaded}></script> -->
+</svelte:head>
 <script>
   import { onMount } from 'svelte'
-  export let name
-  export let message
+  import Scanner from './Scanner.svelte';
+  export let name = 'unset';
+  export let message = 'unset';
   onMount(async () => {
     let data = await (await fetch('/api')).json()
     message = data.msg
     console.log('MESSAGE: ', message)
   })
+  function jzzLoaded() {
+    console.log('called jzzLoaded');
+  }
+  function jzzGearLoaded() {
+    console.log(`JZZ: ${typeof JZZ}`);
+  }
 </script>
 
 <main>
-  <h1>Hello {name}!</h1>
-  <h2>{message}</h2>
-  <h3>Change me!</h3>
-  <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+<h1>{name}, {message}</h1>
+  <Scanner/>
 </main>
 
 <style>
@@ -25,7 +34,7 @@
   }
 
   h1 {
-    color: #ff3e00;
+    color: rebeccapurple;
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
